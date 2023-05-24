@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<body >
+    <div class="search" style="display: center;">
+        <form action="">
+            <input type="text"
+                placeholder=" Buscar Alumnos"
+                name="search"
+                [formControl]="control">
+            <button>
+                <i class="fa fa-search"
+                    style="font-size: 18px;">
+                </i>
+            </button>
+        </form>
+        <br>
+        <br>
+        <mat-label>Seleccione el Estudiante</mat-label>
+         <mat-select [(ngModel)]="id">
+         <mat-option *ngFor="let items of data$" [value]="items.id" (click)="alumno(items.id)">{{items.nombre}}</mat-option>
+         </mat-select>
+         <br>
+         <br>
+         <div class="card" style="margin-left: 20%;" *ngIf="load">
+            <div class="header"></div>
+            <div class="info" *ngFor="let info of informacion">
+              <p class="title">{{info.nombre}}&nbsp;{{info.apellido1}}&nbsp;{{info.apellido2}}</p>
+              <p>Nif :{{info.nif}}</p>
+            </div>
+            <div class="footer">
+              <p class="tag">#HTML #CSS </p>
+              <button type="button" class="action" (click)="CursonAlumno()" >Informacion Cursos</button>
+            </div>
+        </div>
+        <div *ngIf="loadcurso">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+              
+                <!-- Position Column -->
+                <ng-container matColumnDef="codigo">
+                  <th mat-header-cell *matHeaderCellDef> No. </th>
+                  <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
+                </ng-container>
+              
+                <!-- Name Column -->
+                <ng-container matColumnDef="nombre">
+                  <th mat-header-cell *matHeaderCellDef> Name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                </ng-container>
+              
+                <!-- Weight Column -->
+                <ng-container matColumnDef="creditos">
+                  <th mat-header-cell *matHeaderCellDef> Weight </th>
+                  <td mat-cell *matCellDef="let element"> {{element.creditos}} </td>
+                </ng-container>
+              
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="descripcion">
+                  <th mat-header-cell *matHeaderCellDef> Symbol </th>
+                  <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+        </div>
+        
+          
+         
+    </div>
+</body>
+
